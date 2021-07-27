@@ -12,7 +12,6 @@ class MarkovMachine {
     // MORE CODE HERE
     this.words = words;
     this.chainsObj = this.makeChains();
-
   }
 
   /** set markov chains:
@@ -40,20 +39,33 @@ class MarkovMachine {
   /** return random text from chains */
 
   getText(numWords = 100) {
-    // MORE CODE HERE
+    // MORE CODE HERE\
+    let msg = "PRINTING";
 
-    let randomStartingWordIndex = Math.floor((Math.random() * this.words.length));
+    let randomStartingWordIndex = Math.floor((Math.random() * this.words.length)); //random index to find starting word
+    let randomStartingWord = this.words[randomStartingWordIndex]; //starting word
 
-    let randomStartingWord = this.words[randomStartingWordIndex];
+    let text = randomStartingWord;
+    let count = 1;
+    let randomNextWord;
+    do {
+      let nextWords = this.chainsObj[randomStartingWord]; //array from chainObj
+      let randomNextWordIndex = Math.floor((Math.random() * nextWords.length)); //index for array
+      randomNextWord = this.chainsObj[randomStartingWord][randomNextWordIndex]; //next word --> get array from object and then get a word
+      
+      if (randomNextWord === null) {
+        break;
+      } else {
+        text += " " + randomNextWord;
+      }
 
-    let nextWords = this.chainsObj[randomStartingWord];
-
-    let randomNextWordIndex = Math.floor((Math.random() * nextWords.length));
-
-    let randomNextWord = this.chainsObj[randomStartingWord][randomNextWordIndex];
+      count++;
+      randomStartingWord = randomNextWord;
+    } while (randomNextWord != null && count <= numWords)
+    return text;
   }
 }
 
-let mm = new MarkovMachine("the cat in the hat");
-
 // console.log(mm.makeChains())
+// console.log(mm.getText(20));
+module.exports = { MarkovMachine };
