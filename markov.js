@@ -40,8 +40,6 @@ class MarkovMachine {
 
   getText(numWords = 100) {
     // MORE CODE HERE\
-    let msg = "PRINTING";
-
     let randomStartingWordIndex = Math.floor((Math.random() * this.words.length)); //random index to find starting word
     let randomStartingWord = this.words[randomStartingWordIndex]; //starting word
 
@@ -61,7 +59,7 @@ class MarkovMachine {
 
       count++;
       randomStartingWord = randomNextWord;
-    } while (randomNextWord != null && count <= numWords)
+    } while (count <= numWords)
     return text;
   }
 }

@@ -30,6 +30,9 @@ async function webCat(url) {
 
 // Note: alternative to startsWith is to resolve the domain using a DNS lookup (Tim suggested, but not required)
 // Determines if utf8 file or URL and invokes relevant function
+
+// consolidate: make variable called 'promiseText' and save... then add .then outside of the if/else to 
+// avoid duplication (Tim suggested)
 if (argv[2] === "url") {
   webCat(argv[3]).then(function(file){
     let mm = new MarkovMachine(file);
